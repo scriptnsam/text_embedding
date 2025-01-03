@@ -38,4 +38,5 @@ def get_embeddings():
         return jsonify({'error': 'Error generating embeddings'}), 500    
     
 if __name__ == '__main__':
-    app.run(debug=True,port=5001) #Run on port 5001 (or any available port)
+    # app.run(debug=True,port=5001) #Run on port 5001 (or any available port)
+    pass
