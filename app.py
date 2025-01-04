@@ -16,6 +16,10 @@ def load_model():
         import sys
         sys.exit(1)
 
+@app.route('/', methods=['GET'])
+def health_check():
+    return 'Text Embedding Module', 200
+
 @app.route('/embeddings', methods=['POST'])
 def get_embeddings():
     try:

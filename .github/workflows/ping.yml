@@ -1,0 +1,20 @@
+name: Keep Render Alive
+
+on:
+  schedule:
+    - cron: '*/5 * * * *' # Runs every 5 minutes
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Render Service
+        env:
+          YOUR_RENDER_SERVICE_URL: ${{secrets.RENDER_URL}}
+        run: |
+          if curl -Is $YOUR_RENDER_SERVICE_URL | head -n 1 | grep "HTTP/1.1 200 OK"; then
+            echo "Ping successful"
+          else
+            echo "Ping failed" 
+            exit 1 # Exit with error code to indicate failure
+          fi
