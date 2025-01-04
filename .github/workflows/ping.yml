@@ -13,7 +13,7 @@ jobs:
           RENDER_URL: ${{secrets.RENDER_URL}}
         run: |
           response=$(curl -Is "$RENDER_URL" | head -n 1)
-          if echo "$response" | grep -q "HTTP/1.1 200"; then
+          if echo "$response" | grep -q "200"; then
             echo "Ping successful: $response"
           else
             echo "Ping failed: $response"
