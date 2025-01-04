@@ -10,11 +10,12 @@ jobs:
     steps:
       - name: Ping Render Service
         env:
-          YOUR_RENDER_SERVICE_URL: ${{secrets.RENDER_URL}}
+          RENDER_URL: ${{secrets.RENDER_URL}}
         run: |
-          if curl -Is $YOUR_RENDER_SERVICE_URL | head -n 1 | grep "HTTP/1.1 200 OK"; then
-            echo "Ping successful"
+          response=$(curl -Is "$RENDER_URL" | head -n 1)
+          if echo "$response" | grep -q "HTTP/1.1 200"; then
+            echo "Ping successful: $response"
           else
-            echo "Ping failed" 
-            exit 1 # Exit with error code to indicate failure
+            echo "Ping failed: $response"
+            exit 1
           fi
